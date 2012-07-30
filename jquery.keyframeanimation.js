@@ -76,8 +76,7 @@
 		}
 		
 		var currentIteration = 0;
-		// This function will be repeatedly called to perform the animation 
-		// cycle.
+		// This function is called repeatedly to perform the animation cycle.
 		var iterateAnimation = function() {
 			currentIteration++;
 			
