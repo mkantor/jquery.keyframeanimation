@@ -16,8 +16,8 @@
 
 // -----------------------------------------------------------------------------
 
-// When "percentage" is used in this plugin, it refers to numbers between 0 
-// and 1 (inclusive).
+// When "percentage" is used in this plugin it refers to numbers between 0 and 
+// 1 (inclusive).
 ;(function($, window, undefined) {
 	
 	// Public Interface
