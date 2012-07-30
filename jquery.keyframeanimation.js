@@ -36,7 +36,7 @@
 	
 	
 	// Begin the animation cycle for the jQuery element set (`this`). 
-	// Animation particulars are specified with a `settings` object (see 
+	// Animation particulars are specified using a `settings` object (see 
 	// `defaultSettings` for more information).
 	$.fn.keyframeAnimation.initialize = function(settings) {
 		// Every setting has a default value which corresponds as closely as 
