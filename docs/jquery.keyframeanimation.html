@@ -28,7 +28,7 @@
 An object of the form <code>{ percentage: { /* CSS property-value pairs */ }, 
 ... }</code> similar to the CSS 
 <a href="https://developer.mozilla.org/en/CSS/@keyframes"><code>@keyframes</code></a> at-rule. 
-Only CSS properties supported by <code>$.fn.animate</code> can be animated. <br />
+Only CSS properties supported by <code>$.fn.animate</code> can be animated. 
 Currently percentages are specified using JavaScript numbers between 0 
 and 1 (inclusive). This <em>must</em> include properties named <code>0</code> and <code>1</code> (the 
 starting and ending states of the animation).</p></li>
@@ -91,7 +91,7 @@ plugin.</p>             </td>             <td class="code">               <div c
 				</pre></div>             </td>           </tr>                               <tr id="section-16">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-16">&#182;</a>               </div>               <p>Animate each element and tell the next iteration to run 
 after the delay specified by <code>animationDuration</code>.</p>             </td>             <td class="code">               <div class="highlight"><pre>				<span class="nx">elements</span><span class="p">.</span><span class="nx">each</span><span class="p">(</span><span class="nx">animateElement</span><span class="p">);</span>
 				<span class="nx">elements</span><span class="p">.</span><span class="nx">data</span><span class="p">(</span><span class="s1">&#39;keyframeAnimation&#39;</span><span class="p">).</span><span class="nx">timeouts</span><span class="p">.</span><span class="nx">push</span><span class="p">(</span><span class="nb">window</span><span class="p">.</span><span class="nx">setTimeout</span><span class="p">(</span><span class="nx">iterateAnimation</span><span class="p">,</span> <span class="nx">settings</span><span class="p">.</span><span class="nx">animationDuration</span><span class="p">));</span>
-			<span class="p">}</span> <span class="k">else</span> <span class="p">{</span></pre></div>             </td>           </tr>                               <tr id="section-17">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-17">&#182;</a>               </div>               <p>Otherwise, animation iteration is complete.  Do some 
+			<span class="p">}</span> <span class="k">else</span> <span class="p">{</span></pre></div>             </td>           </tr>                               <tr id="section-17">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-17">&#182;</a>               </div>               <p>Otherwise, animation iteration is complete. Do some 
 cleanup.</p>             </td>             <td class="code">               <div class="highlight"><pre>				<span class="k">delete</span> <span class="nx">elements</span><span class="p">.</span><span class="nx">data</span><span class="p">(</span><span class="s1">&#39;keyframeAnimation&#39;</span><span class="p">).</span><span class="nx">timeouts</span><span class="p">;</span>
 			<span class="p">}</span>
 		<span class="p">};</span>

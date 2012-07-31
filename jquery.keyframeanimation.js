@@ -30,7 +30,7 @@
 //   An object of the form `{ percentage: { /* CSS property-value pairs */ }, 
 //   ... }` similar to the CSS 
 //   [`@keyframes`](https://developer.mozilla.org/en/CSS/@keyframes) at-rule. 
-//   Only CSS properties supported by `$.fn.animate` can be animated.  
+//   Only CSS properties supported by `$.fn.animate` can be animated. 
 //   Currently percentages are specified using JavaScript numbers between 0 
 //   and 1 (inclusive). This *must* include properties named `0` and `1` (the 
 //   starting and ending states of the animation).
@@ -123,7 +123,7 @@
 				elements.each(animateElement);
 				elements.data('keyframeAnimation').timeouts.push(window.setTimeout(iterateAnimation, settings.animationDuration));
 			} else {
-				// Otherwise, animation iteration is complete.  Do some 
+				// Otherwise, animation iteration is complete. Do some 
 				// cleanup.
 				delete elements.data('keyframeAnimation').timeouts;
 			}
