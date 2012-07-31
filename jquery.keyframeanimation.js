@@ -82,7 +82,7 @@
 	};
 	
 	
-	$.fn.keyframeAnimation.version = '0.3.3';
+	$.fn.keyframeAnimation.version = '0.3.4';
 	
 	
 	// Begin the animation cycle for the jQuery element set (`this`). 
@@ -141,8 +141,8 @@
 				var styles = settings.keyframes[percentage];
 				
 				// Figure out the duration and offset for this keyframe.
-				/* TODO: Move this (and possibly other stuff) outside the 
-				loop so it only needs to be computed once (or memoize). */
+				/* TODO: Move this out of the loop so it only needs to be 
+				   computed once (or memoize). */
 				var percentageBetweenKeyframes, keyframeOffset;
 				if(percentage != 0) {
 					// These `orderedKeyframePercentages` indexes should 
@@ -168,16 +168,23 @@
 				
 				// Delay transition start as needed.
 				elements.data('keyframeAnimation').timeouts.push(window.setTimeout(function() {
-					// Is animation necessary?
-					if(interpolationDuration === 0) {
-						$(element).css(styles);
-					} else {
-						$(element).animate(styles, {
-							duration: interpolationDuration, 
-							queue: false,
-							easing: makeEasingFunction(settings.animationTimingFunction)
-						});
-					}
+					// Complete any previous animations immediately before 
+					// beginning the next animation. At first glance this 
+					// may appear to be a complicated way of doing 
+					// `queue: false`, but this setup has better behavior 
+					// when timeouts drift. Note that unlike the `fx` 
+					// queue, custom queues need to be manually traversed 
+					// using `$.fn.dequeue`.
+					/* FIXME? Will calling `.stop()` thwart attempts to 
+					   resolve the "skipped styles" bug? (Since the 
+					   solution to that will probably need multiple 
+					   simultaneous animations.) Maybe there should be 
+					   one queue per keyframe? */
+					$(element).stop('keyframeAnimation', false, true).animate(styles, {
+						duration: interpolationDuration, 
+						queue: 'keyframeAnimation',
+						easing: getEasingFunction(settings.animationTimingFunction)
+					}).dequeue('keyframeAnimation');
 				}, keyframeOffset + elementDelay));
 			});
 		};
@@ -240,12 +247,12 @@
 	// function creates a new `$.easing` method based on a property in 
 	// `cubicBezierTimingFunctionPoints` (if needed) and returns its name.
 	/* FIXME? Is the extra complexity of creating these on-the-fly worth the 
-	small performance savings and the smaller `$.easing` namespace footprint? 
-	Since `$.easing` is externally-visible, will it be confusing to not always 
-	have all css* easing functions present? Something like this would 
-	definitely still be necessary for custom timing functions (e.g. 
-	'cubic-bezier(x1, y1, x2, y2)'). */
-	var makeEasingFunction = function(timingFunctionName) {
+	   small performance savings and the smaller `$.easing` namespace 
+	   footprint? Since `$.easing` is externally-visible, will it be 
+	   confusing to not always have all css* easing functions present? 
+	   Something like this would definitely still be necessary for custom 
+	   timing functions (e.g. 'cubic-bezier(x1, y1, x2, y2)'). */
+	var getEasingFunction = function(timingFunctionName) {
 		// The `$.easing` property name, e.g. "cssEaseIn".
 		var easingName = 'css' + timingFunctionName.charAt(0).toUpperCase() + timingFunctionName.slice(1);
 		
