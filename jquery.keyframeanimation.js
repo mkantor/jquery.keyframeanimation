@@ -1,67 +1,101 @@
 // An animation framework based on a CSS animations-like syntax.
 
-// __Requirements:__
+// Dependencies
+// ------------
+// - basic ES5 support (at least `Object.keys`)
+// - [jQuery](http://jquery.com)
+
+// References
+// ----------
+// - [CSS Animations - MDN](https://developer.mozilla.org/en/CSS/CSS_animations)
+// - [W3C CSS Animations Specification](http://www.w3.org/TR/css3-animations/)
+
+// Usage
+// -----
+//     $('.animated').keyframeAnimation({
+//     	animationDuration: 5000,
+//     	keyframes: {
+//     		0: { 'font-size': '200%' },
+//     		0.25: { 'font-size': '500%' },
+//     		1: { 'font-size': '50%' }
+//     	},
+//     	delays: [0, 1000, 2000],
+//     	animationIterationCount: 2,
+//     	animationTimingFunction: 'easeInOut'
+//     });
+
+// Settings
+// --------
+// - `keyframes`  
+//   An object of the form `{ percentage: { /* CSS property-value pairs */ }, 
+//   ... }` similar to the CSS 
+//   [`@keyframes`](https://developer.mozilla.org/en/CSS/@keyframes) at-rule. 
+//   Only CSS properties supported by `$.fn.animate` can be animated.  
+//   Currently percentages are specified using JavaScript numbers between 0 
+//   and 1 (inclusive). This *must* include properties named `0` and `1` (the 
+//   starting and ending states of the animation).
 // 
-// * basic ES5 support (at least `Object.keys`)
-// * [jQuery](http://jquery.com)
-
-// __References:__
+// - `delays`  
+//   An array whose effect is analogous to the `animation-delay` CSS property. 
+//   Delays are are settable per-element by ensuring that indexes in this 
+//   array correspond to element indexes in the jQuery set. Currently only 
+//   JavaScript numbers are accepted (milliseconds).
 // 
-// * [CSS Animations - MDN](https://developer.mozilla.org/en/CSS/CSS_animations)
-// * [W3C CSS Animations Specification](http://www.w3.org/TR/css3-animations/)
+// - `animationDuration`  
+//    Corresponds to the `animation-duration` CSS property. Currently only 
+//    JavaScript numbers are accepted (milliseconds).
+// 
+// - `animationIterationCount`  
+//   Corresponds to the `animation-iteration-count` CSS property.
+// 
+// - `animationTimingFunction`  
+//   Corresponds to the `animation-timing-function` CSS property. Currently 
+//   only the cubic-bezier keyword timing-functions are supported.
 
-// __Author:__ [Matt Kantor](http://mattkantor.com)
-
-// __Version:__ 0.3.2
+// Author
+// ------
+// [Matt Kantor](http://mattkantor.com)
 
 // -----------------------------------------------------------------------------
 
-// When "percentage" is used in this plugin it refers to numbers between 0 and 
-// 1 (inclusive).
+
 ;(function($, window, undefined) {
 	
 	// Public Interface
 	// ------------------------------------------------------------------------
 	
 	
-	// Call the specified method (passing along subsequent arguments) or 
-	// default to the `initialize` method (passing along all arguments).
-	$.fn.keyframeAnimation = function(methodOrSettings/* [, ...] */) {
-		if($.fn.keyframeAnimation[methodOrSettings]) {
-			return $.fn.keyframeAnimation[methodOrSettings].apply(this, Array.prototype.slice.call(arguments, 1));
+	// Call the specified method (passing along subsequent arguments), get
+	// the value of the specified property, or default to calling the 
+	// `initialize` method.
+	$.fn.keyframeAnimation = function(propertyOrSettings/* [, ...] */) {
+		if($.fn.keyframeAnimation[propertyOrSettings]) {
+			// Is this property callable?
+			if($.fn.keyframeAnimation[propertyOrSettings].apply) {
+				return $.fn.keyframeAnimation[propertyOrSettings].apply(this, Array.prototype.slice.call(arguments, 1));
+			} else {
+				return $.fn.keyframeAnimation[propertyOrSettings];
+			}
 		} else {
 			return $.fn.keyframeAnimation.initialize.apply(this, arguments);
 		}
 	};
 	
 	
+	$.fn.keyframeAnimation.version = '0.3.3';
+	
+	
 	// Begin the animation cycle for the jQuery element set (`this`). 
-	// Animation particulars are specified using a `settings` object (see 
-	// `defaultSettings` for more information).
+	// Animation particulars are specified using a `settings` object.
 	$.fn.keyframeAnimation.initialize = function(settings) {
-		// Every setting has a default value which corresponds as closely as 
-		// possible to the CSS defaults, though the animation won't do 
-		// anything if some of these are left at their default values.
+		// Every setting has a default value which emulates the CSS defaults
+		// as closely as possible. The animation won't do anything if some of 
+		// the settings are left at their default values.
 		var defaultSettings = {
-			// An object of the form `{ percentage: { /* map of CSS 
-			// property-value pairs */ }, ... }` similar to the CSS 
-			// [`@keyframes`](https://developer.mozilla.org/en/CSS/@keyframes)
-			// at-rule. This *must* include properties for the indexes `0` 
-			// and `1` (the starting and ending states of the animation).
 			keyframes: {},
-		
-			// The animation delays for elements in the jQuery set, 
-			// specified using an array whose indexes corresponds to 
-			// element indexes.
 			delays: [],
-		
-			// Corresponds to the `animation-duration` CSS property.
 			animationDuration: 0,
-		
-			// Corresponds to the `animation-iteration-count` CSS property.
 			animationIterationCount: 1,
-		
-			// Corresponds to the `animation-timing-function` CSS property.
 			animationTimingFunction: 'ease'
 		};
 		settings = $.extend({}, defaultSettings, settings);
@@ -177,8 +211,7 @@
 	
 	// See [the W3C timing-function 
 	// specification](http://www.w3.org/TR/2012/WD-css3-transitions-20120403/#transition-timing-function-property).
-	// Currently, only the cubic-bezier keyword timing-functions are supported.
-	var timingFunctionPoints = {
+	var cubicBezierTimingFunctionPoints = {
 		ease: [
 			{ x: 0.25, y: 0.1 },
 			{ x: 0.25, y: 1 }
@@ -205,7 +238,7 @@
 	// `$.fn.animate` cannot accept easings as functions (lame), instead they 
 	// need to be put into `$.easing` and specified via property names. This 
 	// function creates a new `$.easing` method based on a property in 
-	// `timingFunctionPoints` (if needed) and returns its name.
+	// `cubicBezierTimingFunctionPoints` (if needed) and returns its name.
 	/* FIXME? Is the extra complexity of creating these on-the-fly worth the 
 	small performance savings and the smaller `$.easing` namespace footprint? 
 	Since `$.easing` is externally-visible, will it be confusing to not always 
@@ -218,7 +251,7 @@
 		
 		if($.easing[easingName] === undefined) {
 			// Create a new `$.easing` method.
-			var points = timingFunctionPoints[timingFunctionName];
+			var points = cubicBezierTimingFunctionPoints[timingFunctionName];
 			$.easing[easingName] = function(percentComplete, millisecondsSince, startValue, endValue, totalDuration) {
 				var totalDurationSeconds = totalDuration / 1000;
 				return cubicBezierAtTime(percentComplete, points[0].x, points[0].y, points[1].x, points[1].y, totalDurationSeconds);
