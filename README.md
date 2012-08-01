@@ -18,7 +18,7 @@ Usage
     		0.25: { 'font-size': '500%' },
     		1: { 'font-size': '50%' }
     	},
-    	delays: [0, 1000, 2000],
+    	delays: [0, 1000, 2000], // correspond with elements in $('.animated')
     	animationIterationCount: 2,
     	animationTimingFunction: 'easeInOut'
     });
@@ -30,26 +30,26 @@ Settings
   ... }` similar to the CSS 
   [`@keyframes`](https://developer.mozilla.org/en/CSS/@keyframes) at-rule. 
   Only CSS properties supported by `$.fn.animate` can be animated. 
-  Currently percentages are specified using numbers between 0 and 1 
-  (inclusive). This *must* include properties named `0` and `1` (the 
-  starting and ending states of the animation).
+  Percentages are specified using numbers between 0 and 1 (inclusive). This 
+  *must* include properties named `0` and `1` (the starting and ending 
+  states of the animation).
 
 - `delays`  
   An array whose effect is analogous to the `animation-delay` CSS property. 
   Delays are are settable per-element by ensuring that indexes in this 
-  array correspond to element indexes in the jQuery set. Currently only 
-  unitless numbers (milliseconds) are accepted as array elements.
+  array correspond to element indexes in the jQuery set. Only unitless 
+  numbers (milliseconds) are accepted as array elements.
 
 - `animationDuration`  
-  Corresponds to the `animation-duration` CSS property. Currently only 
-  unitless numbers (milliseconds) are accepted.
+  Corresponds to the `animation-duration` CSS property. Only unitless 
+  numbers (milliseconds) are accepted.
 
 - `animationIterationCount`  
   Corresponds to the `animation-iteration-count` CSS property.
 
 - `animationTimingFunction`  
-  Corresponds to the `animation-timing-function` CSS property. Currently 
-  only the cubic-bezier keyword timing-functions are supported.
+  Corresponds to the `animation-timing-function` CSS property. Only the 
+  cubic-bezier keyword timing-functions are supported.
 
 Author
 ------

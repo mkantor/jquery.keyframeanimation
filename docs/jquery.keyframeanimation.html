@@ -16,7 +16,7 @@
         0.25: { 'font-size': '500%' },
         1: { 'font-size': '50%' }
     },
-    delays: [0, 1000, 2000],
+    delays: [0, 1000, 2000], // correspond with elements in $('.animated')
     animationIterationCount: 2,
     animationTimingFunction: 'easeInOut'
 });
@@ -28,22 +28,22 @@ An object of the form <code>{ percentage: { /* CSS property-value pairs */ },
 ... }</code> similar to the CSS 
 <a href="https://developer.mozilla.org/en/CSS/@keyframes"><code>@keyframes</code></a> at-rule. 
 Only CSS properties supported by <code>$.fn.animate</code> can be animated. 
-Currently percentages are specified using numbers between 0 and 1 
-(inclusive). This <em>must</em> include properties named <code>0</code> and <code>1</code> (the 
-starting and ending states of the animation).</p></li>
+Percentages are specified using numbers between 0 and 1 (inclusive). This 
+<em>must</em> include properties named <code>0</code> and <code>1</code> (the starting and ending 
+states of the animation).</p></li>
 <li><p><code>delays</code> <br />
 An array whose effect is analogous to the <code>animation-delay</code> CSS property. 
 Delays are are settable per-element by ensuring that indexes in this 
-array correspond to element indexes in the jQuery set. Currently only 
-unitless numbers (milliseconds) are accepted as array elements.</p></li>
+array correspond to element indexes in the jQuery set. Only unitless 
+numbers (milliseconds) are accepted as array elements.</p></li>
 <li><p><code>animationDuration</code> <br />
-Corresponds to the <code>animation-duration</code> CSS property. Currently only 
-unitless numbers (milliseconds) are accepted.</p></li>
+Corresponds to the <code>animation-duration</code> CSS property. Only unitless 
+numbers (milliseconds) are accepted.</p></li>
 <li><p><code>animationIterationCount</code> <br />
 Corresponds to the <code>animation-iteration-count</code> CSS property.</p></li>
 <li><p><code>animationTimingFunction</code> <br />
-Corresponds to the <code>animation-timing-function</code> CSS property. Currently 
-only the cubic-bezier keyword timing-functions are supported.</p></li>
+Corresponds to the <code>animation-timing-function</code> CSS property. Only the 
+cubic-bezier keyword timing-functions are supported.</p></li>
 </ul>             </td>             <td class="code">               <div class="highlight"><pre></pre></div>             </td>           </tr>                               <tr id="section-6">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-6">&#182;</a>               </div>               <h2>Author</h2>
 
 <p><a href="http://mattkantor.com">Matt Kantor</a></p>             </td>             <td class="code">               <div class="highlight"><pre></pre></div>             </td>           </tr>                               <tr id="section-7">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-7">&#182;</a>               </div>               <hr />             </td>             <td class="code">               <div class="highlight"><pre><span class="p">;(</span><span class="kd">function</span><span class="p">(</span><span class="nx">$</span><span class="p">,</span> <span class="nb">window</span><span class="p">,</span> <span class="kc">undefined</span><span class="p">)</span> <span class="p">{</span>

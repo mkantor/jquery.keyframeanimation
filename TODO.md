@@ -106,7 +106,7 @@ brainstorming. Pull requests are obviously very much appreciated.
 	  `animation-duration`
 		- https://developer.mozilla.org/en/CSS/time
 		- disallow unitless numbers? (like CSS)
-	- support 'from' and 'to' keywords for keyframes
+	- support `from` and `to` keywords for keyframes
 		- strings with "%" signs too
 	- accept dash-separated settings names (like CSS)
 		- allowing settings properties to be unquoted is nice, though
@@ -142,12 +142,11 @@ brainstorming. Pull requests are obviously very much appreciated.
 	- perhaps it has better animation timing handling?
 		- if so, could either use it for inspiration or build this plugin on 
 		  top of it (but that means another dependency)
+	- see also: http://rekapi.com/
 	- also look into using `requestAnimationFrame`
 		- `$.fn.animate` should probably use `requestAnimationFrame` 
 		  internally when possible anyway (it doesn't as of 1.7.2)
 
 --------------------------------------------------------------------------------
-- eventually turn this into a shim
-	- still requires quite a bit of work
-	- could possibly use some code from http://rekapi.com/ to help
+- eventually turn this into a polyfill
 
