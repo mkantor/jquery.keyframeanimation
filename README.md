@@ -2,7 +2,6 @@ An animation framework based on a CSS animations-like syntax.
 
 Dependencies
 ------------
-- basic ES5 support (at least `Object.keys`)
 - [jQuery](http://jquery.com)
 
 References

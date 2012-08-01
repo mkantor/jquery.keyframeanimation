@@ -2,7 +2,6 @@
 
 // Dependencies
 // ------------
-// - basic ES5 support (at least `Object.keys`)
 // - [jQuery](http://jquery.com)
 
 // References
@@ -82,7 +81,7 @@
 	};
 	
 	
-	$.fn.keyframeAnimation.version = '0.3.4';
+	$.fn.keyframeAnimation.version = '0.3.5';
 	
 	
 	// Begin the animation cycle for the jQuery element set (`this`). 
@@ -101,13 +100,18 @@
 		settings = $.extend({}, defaultSettings, settings);
 		
 		var elements = this;
-		var orderedKeyframePercentages = Object.keys(settings.keyframes).sort();
 		
 		// Create a namespace for element-associated data owned by this 
 		// plugin.
 		if(elements.data('keyframeAnimation') === undefined) {
 			elements.data('keyframeAnimation', {});
 		}
+		
+		// Sort percentages for consistent iteration order.
+		var orderedKeyframePercentages = (Object.keys ?
+			Object.keys(settings.keyframes) :
+			$.map(settings.keyframes, function(styles, percentage) { return percentage; })
+		).sort();
 		
 		var currentIteration = 0;
 		// This function is called repeatedly to perform the animation cycle.
