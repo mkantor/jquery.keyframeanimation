@@ -2,7 +2,7 @@
 
 // Dependencies
 // ------------
-// - [jQuery](http://jquery.com)
+// - [jQuery](http://jquery.com) 1.2.3+
 
 // References
 // ----------
@@ -162,7 +162,7 @@
 					// the percentage of the previous keyframe.
 					keyframeOffset = settings.animationDuration * orderedKeyframePercentages[keyframeIndex - 1];
 				} else {
-					// The initial keyframe's styles are applied instantly.
+					// The 0% keyframe's styles are applied instantly.
 					percentageBetweenKeyframes = 0;
 					keyframeOffset = 0;
 				}

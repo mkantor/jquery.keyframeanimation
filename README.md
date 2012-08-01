@@ -1,8 +1,11 @@
+jquery.keyframeanimation
+========================
+
 An animation framework based on a CSS animations-like syntax.
 
 Dependencies
 ------------
-- [jQuery](http://jquery.com)
+- [jQuery](http://jquery.com) 1.2.3+
 
 References
 ----------

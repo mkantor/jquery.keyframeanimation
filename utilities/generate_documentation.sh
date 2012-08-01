@@ -4,11 +4,6 @@
 # code. It requires docco and some common shell utilities. I find it works 
 # well in a pre-commit hook.
 
-# FIXME: It'd be nice if this could operate on staged file contents when 
-# running as a pre-commit hook (right now it operates on the WC file contents, 
-# which may differ).
-
-
 
 # This script accepts exactly one argument: the file to use as the 
 # documentation source.
@@ -46,11 +41,16 @@ END_OF_HEADER=`grep --regexp="$DELIMITER" --line-number --max-count=1 "$SOURCE_F
 COMMENTS=`head -n $(($END_OF_HEADER-1)) "$SOURCE_FILE"`
 
 # Strip out all instances of "// " from the beginning of lines.
-README=`echo "$COMMENTS" | sed 's/^\/\/ //'`
+README_BODY=`echo "$COMMENTS" | sed 's/^\/\/ //'`
 
-if [ -n "$README" ]
+if [ -n "$README_BODY" ]
 then
-	echo "$README" > "$README_FILE" && echo "Saved README in $README_FILE."
+	# The README title is the source file's name without its extension.
+	TITLE=`echo "$SOURCE_FILE" | sed 's/\(.*\)\..*$/\1/'`
+	UNDERLINE=`echo "$TITLE" | sed 's/./=/g'`
+	
+	# Generate the full README and save it.
+	printf '%s\n%s\n\n%s\n' "$TITLE" "$UNDERLINE" "$README_BODY" > "$README_FILE" && echo "Saved README in $README_FILE."
 else
 	echo "No README text was found."
 fi
