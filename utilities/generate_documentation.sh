@@ -33,18 +33,20 @@ docco "$SOURCE_FILE"
 
 
 
-# Generate the README from the comment header in the source code
+# Generate the README
 # ------------------------------------------------------------------------------
+
+# The README text comes from the header comments at the top of the source file.
 
 # The header is delimited by 70 dashes (or more).
 DELIMITER='----------------------------------------------------------------------'
 
-# Grab the header comments from the source file.
+# Grab the comments which will become the README.
 END_OF_HEADER=`grep --regexp="$DELIMITER" --line-number --max-count=1 "$SOURCE_FILE" | cut --delimiter=: --fields=1`
-RAW_HEADER=`head -n $(($END_OF_HEADER-1)) "$SOURCE_FILE"`
+COMMENTS=`head -n $(($END_OF_HEADER-1)) "$SOURCE_FILE"`
 
 # Strip out all instances of "// " from the beginning of lines.
-README=`echo "$RAW_HEADER" | sed 's/^\/\/ //'`
+README=`echo "$COMMENTS" | sed 's/^\/\/ //'`
 
 if [ -n "$README" ]
 then
