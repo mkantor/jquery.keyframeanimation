@@ -1,14 +1,15 @@
-(I'm not making any promises that I'll actually get around to doing any of 
-this; it's just brainstorming.)
+No promises that any of this will actually get implemented; it's just 
+brainstorming. Pull requests are obviously very much appreciated.
 
 
+--------------------------------------------------------------------------------
 - provide a setting for `animation-fill-mode`
 	- right now behavior is equivalent to "forwards"
 	- could implement "backwards" by applying 0% styles right away
 	- having to set up initial states in CSS for the JS version is lame
 	- at the very least should make the default behavior the same as CSS
 
-
+--------------------------------------------------------------------------------
 - make it so that the 0 and 1 keyframes are not required
 	- from the spec (http://www.w3.org/TR/css3-animations/#keyframes):
 		- "If a 0% or "from" keyframe is not specified, then the user agent 
@@ -38,7 +39,7 @@ this; it's just brainstorming.)
 			  all keyframes."
 				- http://www.w3.org/TR/css3-animations/#keyframes
 
-
+--------------------------------------------------------------------------------
 - determine how this should work for non-sequential animations, e.g.  
   ```
   	0% {
@@ -61,7 +62,7 @@ this; it's just brainstorming.)
 			- http://www.w3.org/TR/css3-animations/#keyframes
 	- see the styles-missing-from-keyframes example for a testcase
 
-
+--------------------------------------------------------------------------------
 - make the `delays` setting less whack
 	- support a single number that applies to all elements like other settings
 	- rename to "animationDelay"
@@ -71,7 +72,7 @@ this; it's just brainstorming.)
 	  flexible specificity (per element/global/whatever)
 		- see the "make settings more CSS-like" TODO for ideas
 
-
+--------------------------------------------------------------------------------
 - make settings more CSS-like
 	- animation properties should all be settable with flexible specificity 
 	  (the best of both how `delays` works now and the other properties)
@@ -118,17 +119,17 @@ this; it's just brainstorming.)
 		- this probably isn't worth doing unless this becomes a full-fledged 
 		  polyfill
 
-
+--------------------------------------------------------------------------------
 - implement `step-start` and `step-end` timing functions as well as custom 
   function specifications (`steps(...)` and `cubic-bezier(...)`)
 	- https://developer.mozilla.org/en/CSS/timing-function
 	- http://www.w3.org/TR/2012/WD-css3-transitions-20120403/#transition-timing-function-property
 
-
+--------------------------------------------------------------------------------
 - implement animation events
 	- https://developer.mozilla.org/en/CSS/CSS_animations#Using_animation_events
 
-
+--------------------------------------------------------------------------------
 - provide support for non-integer `animation-iteration-count` values
 	- http://dev.w3.org/csswg/css3-animations/#animation-iteration-count-property
 	  says:
@@ -136,7 +137,7 @@ this; it's just brainstorming.)
 		  through a cycle. Negative values of `animation-iteration-count` 
 		  are invalid."
 
-
+--------------------------------------------------------------------------------
 - see https://github.com/KuraFire/runloop for an alternative approach
 	- perhaps it has better animation timing handling?
 		- if so, could either use it for inspiration or build this plugin on 
@@ -145,9 +146,8 @@ this; it's just brainstorming.)
 		- `$.fn.animate` should probably use `requestAnimationFrame` 
 		  internally when possible anyway (it doesn't as of 1.7.2)
 
-
+--------------------------------------------------------------------------------
 - eventually turn this into a shim
 	- still requires quite a bit of work
 	- could possibly use some code from http://rekapi.com/ to help
-
 
