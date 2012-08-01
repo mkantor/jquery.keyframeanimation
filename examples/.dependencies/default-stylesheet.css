@@ -1,0 +1,15 @@
+section, aside {
+	margin: 1em 0;
+	padding: 0 1em;
+}
+section {
+	border: 1px dashed;
+}
+aside {
+	border-radius: 1em;
+}
+.bugs {
+	border: 1px solid #800;
+	background-color: #f88;
+	color: black;
+}

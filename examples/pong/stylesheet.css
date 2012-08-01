@@ -1,0 +1,314 @@
+/* basic styles */
+	html,
+	body {
+		height: 100%;
+	}
+	
+	body {
+		background-color: black;
+		margin: 0 40px;
+		position: relative; /* use this as the positioning context for child elements */
+		color: white;
+	}
+	
+	.player,
+	#ball {
+		background-color: white;
+		position: absolute;
+	}
+	
+	.player {
+		height: 60px;
+		width: 20px;
+		top: 50%;
+		margin-top: -30px; /* half of .player height */
+	}
+	.player::after {
+		font-size: 9px;
+		font-family: verdana, sans-serif;
+		text-align: center;
+		width: 20px; /* same as .player width */
+		line-height: 60px; /* same as .player height */
+		display: block;
+		color: black;
+	}
+	#player-css::after {
+		content: 'CSS';
+	}
+	#player-js::after {
+		content: 'JS';
+	}
+	
+	#player-css {
+		left: -20px; /* negative .player width */
+	}
+	#player-js {
+		right: -20px; /* negative .player width */
+	}
+	
+	#ball {
+		height: 20px;
+		width: 20px;
+		left: 50%;
+		top: 50%;
+		margin-left: -10px; /* half of #ball width */
+		margin-top: -10px; /* half of #ball height */
+	}
+
+
+/* animations */
+	/* At least Epiphany 2.30.2 (AppleWebKit/531.2+) and Safai 4.0.3 
+	   (AppleWebKit/531.9) will not animate if the 0% and 100% keyframes are 
+	   missing. The spec says this should be okay though. */
+	@-webkit-keyframes ball {
+		/* the first and last top values have to be on "opposite sides" of 
+		   50% so that the ball goes through that point without jumping */
+		5%  {
+			left: 0%;
+			top: 30%;
+		}
+		15% {
+			left: 100%;
+			top: 40%;
+		}
+		25% {
+			left: 0%;
+			top: 90%;
+		}
+		35% {
+			left: 100%;
+			top: 30%;
+		}
+		45% {
+			left: 0%;
+			top: 10%;
+		}
+		55% {
+			left: 100%;
+			top: 60%;
+		}
+		65% {
+			left: 0%;
+			top: 50%;
+		}
+		75% {
+			left: 100%;
+			top: 30%;
+		}
+		85% {
+			left: 0%;
+			top: 60%;
+		}
+		95% {
+			left: 100%;
+			top: 70%;
+		}
+	}
+	@-moz-keyframes ball {
+		5%  {
+			left: 0%;
+			top: 30%;
+		}
+		15% {
+			left: 100%;
+			top: 40%;
+		}
+		25% {
+			left: 0%;
+			top: 90%;
+		}
+		35% {
+			left: 100%;
+			top: 30%;
+		}
+		45% {
+			left: 0%;
+			top: 10%;
+		}
+		55% {
+			left: 100%;
+			top: 60%;
+		}
+		65% {
+			left: 0%;
+			top: 50%;
+		}
+		75% {
+			left: 100%;
+			top: 30%;
+		}
+		85% {
+			left: 0%;
+			top: 60%;
+		}
+		95% {
+			left: 100%;
+			top: 70%;
+		}
+	}
+	@-o-keyframes ball {
+		5%  {
+			left: 0%;
+			top: 30%;
+		}
+		15% {
+			left: 100%;
+			top: 40%;
+		}
+		25% {
+			left: 0%;
+			top: 90%;
+		}
+		35% {
+			left: 100%;
+			top: 30%;
+		}
+		45% {
+			left: 0%;
+			top: 10%;
+		}
+		55% {
+			left: 100%;
+			top: 60%;
+		}
+		65% {
+			left: 0%;
+			top: 50%;
+		}
+		75% {
+			left: 100%;
+			top: 30%;
+		}
+		85% {
+			left: 0%;
+			top: 60%;
+		}
+		95% {
+			left: 100%;
+			top: 70%;
+		}
+	}
+	@keyframes ball {
+		5%  {
+			left: 0%;
+			top: 30%;
+		}
+		15% {
+			left: 100%;
+			top: 40%;
+		}
+		25% {
+			left: 0%;
+			top: 90%;
+		}
+		35% {
+			left: 100%;
+			top: 30%;
+		}
+		45% {
+			left: 0%;
+			top: 10%;
+		}
+		55% {
+			left: 100%;
+			top: 60%;
+		}
+		65% {
+			left: 0%;
+			top: 50%;
+		}
+		75% {
+			left: 100%;
+			top: 30%;
+		}
+		85% {
+			left: 0%;
+			top: 60%;
+		}
+		95% {
+			left: 100%;
+			top: 70%;
+		}
+	}
+	
+	@-webkit-keyframes player-left {
+		/* Needs top values matching ball for all ball keyframes with 
+		  `left: 0%` in order to hit the ball. There are some extra 
+		   "between hit" keyframes to make the player seem more human. */
+		/* TODO? Could use various timing-functions for more humanness. */
+		5%  { top: 30%; }
+		15% { top: 45%; } /* between hits */
+		25% { top: 90%; }
+		37% { top: 25%; } /* between hits */
+		45% { top: 10%; }
+		65% { top: 50%; }
+		76% { top: 25%; } /* between hits */
+		85% { top: 60%; }
+		96% { top: 70%; } /* between hits */
+	}
+	@-moz-keyframes player-left {
+		5%  { top: 30%; }
+		15% { top: 45%; } /* between hits */
+		25% { top: 90%; }
+		37% { top: 25%; } /* between hits */
+		45% { top: 10%; }
+		65% { top: 50%; }
+		76% { top: 25%; } /* between hits */
+		85% { top: 60%; }
+		96% { top: 70%; } /* between hits */
+	}
+	@-o-keyframes player-left {
+		5%  { top: 30%; }
+		15% { top: 45%; } /* between hits */
+		25% { top: 90%; }
+		37% { top: 25%; } /* between hits */
+		45% { top: 10%; }
+		65% { top: 50%; }
+		76% { top: 25%; } /* between hits */
+		85% { top: 60%; }
+		96% { top: 70%; } /* between hits */
+	}
+	@keyframes player-left {
+		5%  { top: 30%; }
+		15% { top: 45%; } /* between hits */
+		25% { top: 90%; }
+		37% { top: 25%; } /* between hits */
+		45% { top: 10%; }
+		65% { top: 50%; }
+		76% { top: 25%; } /* between hits */
+		85% { top: 60%; }
+		96% { top: 70%; } /* between hits */
+	}
+	
+	#ball,
+	#player-css {
+		-webkit-animation-duration: 20s;
+		   -moz-animation-duration: 20s;
+		     -o-animation-duration: 20s;
+		        animation-duration: 20s;
+		-webkit-animation-iteration-count: infinite;
+		   -moz-animation-iteration-count: infinite;
+		     -o-animation-iteration-count: infinite;
+		        animation-iteration-count: infinite;
+	}
+	
+	#ball {
+		-webkit-animation-name: ball;
+		   -moz-animation-name: ball;
+		     -o-animation-name: ball;
+		        animation-name: ball;
+		-webkit-animation-timing-function: linear;
+		   -moz-animation-timing-function: linear;
+		     -o-animation-timing-function: linear;
+		        animation-timing-function: linear;
+	}
+	#player-css {
+		-webkit-animation-name: player-left;
+		   -moz-animation-name: player-left;
+		     -o-animation-name: player-left;
+		        animation-name: player-left;
+		-webkit-animation-timing-function: ease-in-out;
+		   -moz-animation-timing-function: ease-in-out;
+		     -o-animation-timing-function: ease-in-out;
+		        animation-timing-function: ease-in-out;
+	}

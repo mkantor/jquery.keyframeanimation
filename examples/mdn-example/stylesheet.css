@@ -1,0 +1,70 @@
+	h1.css {
+		-webkit-animation-duration: 3s;
+		   -moz-animation-duration: 3s;
+		     -o-animation-duration: 3s;
+		        animation-duration: 3s;
+		-webkit-animation-name: slidein;
+		   -moz-animation-name: slidein;
+		     -o-animation-name: slidein;
+		        animation-name: slidein;
+	}
+	@-webkit-keyframes slidein {
+		from {
+			margin-left: 100%;
+			width: 300%;
+		}
+		75% {
+			font-size: 300%;
+			margin-left: 25%;
+			width: 150%;
+		}
+		to {
+			margin-left: 0%;
+			width: 100%;
+		}
+	}
+	@-moz-keyframes slidein {
+		from {
+			margin-left: 100%;
+			width: 300%;
+		}
+		75% {
+			font-size: 300%;
+			margin-left: 25%;
+			width: 150%;
+		}
+		to {
+			margin-left: 0%;
+			width: 100%;
+		}
+	}
+	@-o-keyframes slidein {
+		from {
+			margin-left: 100%;
+			width: 300%;
+		}
+		75% {
+			font-size: 300%;
+			margin-left: 25%;
+			width: 150%;
+		}
+		to {
+			margin-left: 0%;
+			width: 100%;
+		}
+	}
+	@keyframes slidein {
+		from {
+			margin-left: 100%;
+			width: 300%;
+		}
+		75% {
+			font-size: 300%;
+			margin-left: 25%;
+			width: 150%;
+		}
+		to {
+			margin-left: 0%;
+			width: 100%;
+		}
+	}

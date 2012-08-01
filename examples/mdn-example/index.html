@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<title>MDN CSS Animations Example 2</title>
+	
+	<script src="../.dependencies/html5shiv-3.6.js"></script>
+	<script src="../.dependencies/jquery-1.7.2.js"></script>
+	<script src="../../jquery.keyframeanimation.js"></script>
+	<script src="behavior.js"></script>
+	
+	<link rel="stylesheet" href="../.dependencies/default-stylesheet.css">
+	<link rel="stylesheet" href="stylesheet.css">
+</head>
+<body>
+	<h1 class="css">Watch me move (CSS)</h1>
+	<h1 class="js">Watch me move (JavaScript)</h1>
+	<p>
+		This is a modified version of 
+		<a href="https://developer.mozilla.org/samples/cssref/animations/cssanim2.html">this MDN CSS animation example</a>.
+	</p>
+	
+	<aside class="bugs">
+		<h1>Bugs</h1>
+		<ul>
+			<li>
+				<p>
+					The heading does not animate back to its original font 
+					size.
+				</p>
+				<p>
+					For missing styles in 0%/100% keyframes most browsers 
+					seem to do something like "assume an implicit value 
+					from the cascade" (with the behavior for complete 
+					omission of the 0%/100% keyframes being the logical 
+					extension of this). This differs from properties 
+					missing in intermediate keyframes (see the 
+					<a href="../styles-missing-from-keyframes/index.html">styles-missing-from-keyframes</a> 
+					example) which many browsers will tween as if the 
+					intermediate keyframe didn't exist for the purposes 
+					of that particular style. The recommended behavior 
+					isn't actually specified as of writing this text 
+					(2012-6-31). The 
+					<a href="http://www.w3.org/TR/css3-animations/#keyframes">specification</a>
+					has a placeholder which says <q>NOTE: describe what 
+					happens if a property is not present in all 
+					keyframes.</q>.
+				</p>
+			</li>
+		</ul>
+	</aside>
+</body>
+</html>

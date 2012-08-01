@@ -1,0 +1,133 @@
+/* general styles */
+	.slideshow {
+		list-style: none;
+		position: relative;
+		padding: 0;
+	}
+		.slideshow > li {
+			width: 10em;
+			line-height: 10em;
+			text-align: center;
+		}
+		/* move all except the first slide up and under the first slide */
+		.slideshow > :not(:first-child) {
+			position: absolute;
+			top: 0;
+			left: 0;
+		}
+		.slideshow > :nth-child(1) {
+			/* for z-index */
+			position: relative;
+		}
+		/* reverse stacking (first in source order goes on top) */
+		.slideshow > :nth-child(1) {
+			z-index: 4;
+			background-color: lime;
+		}
+		.slideshow > :nth-child(2) {
+			z-index: 3;
+			background-color: yellow;
+		}
+		.slideshow > :nth-child(3) {
+			z-index: 2;
+			background-color: fuchsia;
+		}
+		.slideshow > :nth-child(4) {
+			z-index: 1;
+			background-color: aqua;
+		}
+
+
+/* css implementation of slideshow animations */
+	@-webkit-keyframes slideshow {
+		0%   { opacity: 0; }
+		3%   { opacity: 1; }
+		22%  { opacity: 1; }
+		25%  { opacity: 0; }
+		100% { opacity: 0; }
+	}
+	@-moz-keyframes slideshow {
+		0%   { opacity: 0; }
+		3%   { opacity: 1; }
+		22%  { opacity: 1; }
+		25%  { opacity: 0; }
+		100% { opacity: 0; }
+	}
+	@-o-keyframes slideshow {
+		0%   { opacity: 0; }
+		3%   { opacity: 1; }
+		22%  { opacity: 1; }
+		25%  { opacity: 0; }
+		100% { opacity: 0; }
+	}
+	@keyframes slideshow {
+		/*
+			since there are four slides,
+			25% of the animation is devoted to each slide
+		*/
+		0%   { opacity: 0; } /* start fading in */
+		3%   { opacity: 1; } /* finish fading in */
+		/* stay fully opaque */
+		22%  { opacity: 1; } /* start fading out */
+		25%  { opacity: 0; } /* finish fading out */
+
+		100% { opacity: 0; }
+	}
+
+	.slideshow.css > *,
+	.slideshow.fallback > * {
+		-webkit-animation-name: slideshow;
+		   -moz-animation-name: slideshow;
+		     -o-animation-name: slideshow;
+		        animation-name: slideshow;
+		-webkit-animation-duration: 32s;
+		   -moz-animation-duration: 32s;
+		     -o-animation-duration: 32s;
+		        animation-duration: 32s;
+		-webkit-animation-iteration-count: infinite;
+		   -moz-animation-iteration-count: infinite;
+		     -o-animation-iteration-count: infinite;
+		        animation-iteration-count: infinite;
+		
+		/* hold on to the 100%/0% styles when not animating */
+		-webkit-animation-fill-mode: both;
+		   -moz-animation-fill-mode: both;
+		     -o-animation-fill-mode: both;
+		        animation-fill-mode: both;
+	}
+	.slideshow.css > :nth-child(1),
+	.slideshow.fallback > :nth-child(1) {
+		-webkit-animation-delay: 0s;
+		   -moz-animation-delay: 0s;
+		     -o-animation-delay: 0s;
+		        animation-delay: 0s;
+	}
+	.slideshow.css > :nth-child(2),
+	.slideshow.fallback > :nth-child(2) {
+		-webkit-animation-delay: 8s;
+		   -moz-animation-delay: 8s;
+		     -o-animation-delay: 8s;
+		        animation-delay: 8s;
+	}
+	.slideshow.css > :nth-child(3),
+	.slideshow.fallback > :nth-child(3) {
+		-webkit-animation-delay: 16s;
+		   -moz-animation-delay: 16s;
+		     -o-animation-delay: 16s;
+		        animation-delay: 16s;
+	}
+	.slideshow.css > :nth-child(4),
+	.slideshow.fallback > :nth-child(4) {
+		-webkit-animation-delay: 24s;
+		   -moz-animation-delay: 24s;
+		     -o-animation-delay: 24s;
+		        animation-delay: 24s;
+	}
+
+
+/* FIXME: this is required to emulate `animation-fill-mode: backwards` (or 
+   `both`) in JavaScript animations since there is not yet a setting for it */
+	.slideshow > :not(:first-child) {
+		opacity: 0;
+	}
+
