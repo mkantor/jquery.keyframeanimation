@@ -30,19 +30,19 @@ Settings
   ... }` similar to the CSS 
   [`@keyframes`](https://developer.mozilla.org/en/CSS/@keyframes) at-rule. 
   Only CSS properties supported by `$.fn.animate` can be animated. 
-  Currently percentages are specified using JavaScript numbers between 0 
-  and 1 (inclusive). This *must* include properties named `0` and `1` (the 
+  Currently percentages are specified using numbers between 0 and 1 
+  (inclusive). This *must* include properties named `0` and `1` (the 
   starting and ending states of the animation).
 
 - `delays`  
   An array whose effect is analogous to the `animation-delay` CSS property. 
   Delays are are settable per-element by ensuring that indexes in this 
   array correspond to element indexes in the jQuery set. Currently only 
-  JavaScript numbers are accepted (milliseconds).
+  unitless numbers (milliseconds) are accepted as array elements.
 
 - `animationDuration`  
-   Corresponds to the `animation-duration` CSS property. Currently only 
-   JavaScript numbers are accepted (milliseconds).
+  Corresponds to the `animation-duration` CSS property. Currently only 
+  unitless numbers (milliseconds) are accepted.
 
 - `animationIterationCount`  
   Corresponds to the `animation-iteration-count` CSS property.

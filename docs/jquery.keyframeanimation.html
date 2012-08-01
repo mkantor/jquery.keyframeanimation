@@ -28,17 +28,17 @@ An object of the form <code>{ percentage: { /* CSS property-value pairs */ },
 ... }</code> similar to the CSS 
 <a href="https://developer.mozilla.org/en/CSS/@keyframes"><code>@keyframes</code></a> at-rule. 
 Only CSS properties supported by <code>$.fn.animate</code> can be animated. 
-Currently percentages are specified using JavaScript numbers between 0 
-and 1 (inclusive). This <em>must</em> include properties named <code>0</code> and <code>1</code> (the 
+Currently percentages are specified using numbers between 0 and 1 
+(inclusive). This <em>must</em> include properties named <code>0</code> and <code>1</code> (the 
 starting and ending states of the animation).</p></li>
 <li><p><code>delays</code> <br />
 An array whose effect is analogous to the <code>animation-delay</code> CSS property. 
 Delays are are settable per-element by ensuring that indexes in this 
 array correspond to element indexes in the jQuery set. Currently only 
-JavaScript numbers are accepted (milliseconds).</p></li>
+unitless numbers (milliseconds) are accepted as array elements.</p></li>
 <li><p><code>animationDuration</code> <br />
 Corresponds to the <code>animation-duration</code> CSS property. Currently only 
-JavaScript numbers are accepted (milliseconds).</p></li>
+unitless numbers (milliseconds) are accepted.</p></li>
 <li><p><code>animationIterationCount</code> <br />
 Corresponds to the <code>animation-iteration-count</code> CSS property.</p></li>
 <li><p><code>animationTimingFunction</code> <br />
