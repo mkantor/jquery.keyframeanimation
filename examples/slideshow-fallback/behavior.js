@@ -13,9 +13,9 @@ $(function() {
 	};
 	
 	if(Modernizr.cssanimations) {
-		$('.slideshow.fallback').before('<p>Using CSS animation</p>');
+		$('.slideshow.fallback').before('<p>Using CSS animation.</p>');
 	} else {
-		$('.slideshow.fallback').before('<p>Using JavaScript animation</p>');
+		$('.slideshow.fallback').before('<p>This browser lacks CSS animation support; falling back to JavaScript animation.</p>');
 		$('.slideshow.fallback > *').keyframeAnimation(animationSettings);
 	}
 	

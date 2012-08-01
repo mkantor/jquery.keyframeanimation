@@ -9,14 +9,15 @@
 			line-height: 10em;
 			text-align: center;
 		}
-		/* move all except the first slide up and under the first slide */
-		.slideshow > :not(:first-child) {
+		/* move slides up and under the first one */
+		.slideshow > * {
 			position: absolute;
 			top: 0;
 			left: 0;
 		}
-		.slideshow > :nth-child(1) {
-			/* for z-index */
+		
+		/* the first one gets to stay in the flow */
+		.slideshow > :first-child {
 			position: relative;
 		}
 		/* reverse stacking (first in source order goes on top) */
@@ -127,7 +128,11 @@
 
 /* FIXME: this is required to emulate `animation-fill-mode: backwards` (or 
    `both`) in JavaScript animations since there is not yet a setting for it */
-	.slideshow > :not(:first-child) {
+	.slideshow > * {
+		/* this filter doesn't need to be anywhere else since CSS animations 
+		   aren't supported in oldIE anyway and jQuery automagically takes 
+		   care of it on the JS side */
+		-ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=0)";
 		opacity: 0;
 	}
 
