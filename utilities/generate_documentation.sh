@@ -5,16 +5,17 @@
 # well in a pre-commit hook.
 
 
+
 # This script accepts exactly one argument: the file to use as the 
 # documentation source.
 if [ $# -ne 1 ]
 then
 	echo 1>&2 "$0: One argument (the source file) must be specified."
-	exit 2
+	exit 64
 elif [ ! -f $1 ]
 then
 	echo 1>&2 "$0: $1: No such file."
-	exit 2
+	exit 66
 fi
 
 SOURCE_FILE=$1
@@ -46,7 +47,7 @@ README_BODY=`echo "$COMMENTS" | sed 's/^\/\/ //'`
 if [ -n "$README_BODY" ]
 then
 	# The README title is the source file's name without its extension.
-	TITLE=`echo "$SOURCE_FILE" | sed 's/\(.*\)\..*$/\1/'`
+	TITLE=`basename "$SOURCE_FILE" | sed 's/\(.*\)\..*$/\1/'`
 	UNDERLINE=`echo "$TITLE" | sed 's/./=/g'`
 	
 	# Generate the full README and save it.
