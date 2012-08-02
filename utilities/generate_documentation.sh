@@ -1,8 +1,8 @@
 #!/bin/sh
 
 # This script generates documentation by pulling out comments from the source 
-# code. It requires docco and some common shell utilities. I find it works 
-# well in a pre-commit hook.
+# code. It requires [docco](http://jashkenas.github.com/docco/) and some 
+# common shell utilities. I find it works well in a pre-commit hook.
 
 
 
@@ -19,13 +19,19 @@ then
 fi
 
 SOURCE_FILE=$1
+
 README_FILE=README.md
+SOURCE_FILE_BASENAME_WITHOUT_EXTENSION=`basename "$SOURCE_FILE" | sed 's/\(.*\)\..*$/\1/'`
 
 
 
 # Generate docs/*
 # ------------------------------------------------------------------------------
 docco "$SOURCE_FILE"
+
+# Since there is only one documentation file, name it index.html.
+DOCCO_HTML_FILE="docs/$SOURCE_FILE_BASENAME_WITHOUT_EXTENSION.html"
+mv "$DOCCO_HTML_FILE" "docs/index.html"
 
 
 
@@ -46,8 +52,7 @@ README_BODY=`echo "$COMMENTS" | sed 's/^\/\/ //'`
 
 if [ -n "$README_BODY" ]
 then
-	# The README title is the source file's name without its extension.
-	TITLE=`basename "$SOURCE_FILE" | sed 's/\(.*\)\..*$/\1/'`
+	TITLE=$SOURCE_FILE_BASENAME_WITHOUT_EXTENSION
 	UNDERLINE=`echo "$TITLE" | sed 's/./=/g'`
 	
 	# Generate the full README and save it.
