@@ -3,6 +3,12 @@ jquery.keyframeanimation
 
 An animation framework based on a CSS animations-like syntax.
 
+This project is [hosted on 
+GitHub](http://github.com/mkantor/jquery.keyframeanimation). [Annotated 
+source code](http://mkantor.github.com/jquery.keyframeanimation/docs) and 
+[usage examples](http://mkantor.github.com/jquery.keyframeanimation/examples) 
+are available online.
+
 Dependencies
 ------------
 - [jQuery](http://jquery.com) 1.2.3+
