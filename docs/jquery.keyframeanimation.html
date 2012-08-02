@@ -5,7 +5,7 @@
 </ul>             </td>             <td class="code">               <div class="highlight"><pre></pre></div>             </td>           </tr>                               <tr id="section-3">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-3">&#182;</a>               </div>               <h2>References</h2>
 
 <ul>
-<li><a href="https://developer.mozilla.org/en/CSS/CSS_animations">CSS Animations - MDN</a></li>
+<li><a href="http://developer.mozilla.org/en/CSS/CSS_animations">CSS Animations - MDN</a></li>
 <li><a href="http://www.w3.org/TR/css3-animations/">W3C CSS Animations Specification</a></li>
 </ul>             </td>             <td class="code">               <div class="highlight"><pre></pre></div>             </td>           </tr>                               <tr id="section-4">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-4">&#182;</a>               </div>               <h2>Usage</h2>
 
@@ -16,7 +16,7 @@
         0.25: { 'font-size': '500%' },
         1: { 'font-size': '50%' }
     },
-    delays: [0, 1000, 2000], // correspond with elements in $('.animated')
+    delays: [0, 1000, 2000], // indexes match $('.animated')
     animationIterationCount: 2,
     animationTimingFunction: 'easeInOut'
 });
@@ -24,10 +24,11 @@
 
 <ul>
 <li><p><code>keyframes</code> <br />
-An object of the form <code>{ percentage: { /* CSS property-value pairs */ }, 
-... }</code> similar to the CSS 
-<a href="https://developer.mozilla.org/en/CSS/@keyframes"><code>@keyframes</code></a> at-rule. 
-Only CSS properties supported by <code>$.fn.animate</code> can be animated. 
+An object of the form 
+<code>{ percentage: { cssProperty: cssValue [, ...] } [, ...] }</code> similar to 
+the CSS <a href="http://developer.mozilla.org/en/CSS/@keyframes"><code>@keyframes</code></a> 
+at-rule. Only CSS properties/values supported by 
+<a href="http://api.jquery.com/animate/"><code>$.fn.animate</code></a> can be animated. 
 Percentages are specified using numbers between 0 and 1 (inclusive). This 
 <em>must</em> include properties named <code>0</code> and <code>1</code> (the starting and ending 
 states of the animation).</p></li>
@@ -122,9 +123,9 @@ the percentage of the previous keyframe.</p>             </td>             <td c
 beginning the next animation. At first glance this 
 may appear to be a complicated way of doing 
 <code>queue: false</code>, but this setup has better behavior 
-when timeouts drift. Note that unlike the <code>fx</code> 
-queue, custom queues need to be manually traversed 
-using <code>$.fn.dequeue</code>.</p>             </td>             <td class="code">               <div class="highlight"><pre>					<span class="cm">/* FIXME? Will calling `.stop()` thwart attempts to </span>
+when timeouts drift. Unlike the default queue, 
+custom queues need to be manually traversed using 
+<a href="http://api.jquery.com/dequeue/"><code>$.fn.dequeue</code></a>.</p>             </td>             <td class="code">               <div class="highlight"><pre>					<span class="cm">/* FIXME? Will calling `.stop()` thwart attempts to </span>
 <span class="cm">					   resolve the &quot;skipped styles&quot; bug? (Since the </span>
 <span class="cm">					   solution to that will probably need multiple </span>
 <span class="cm">					   simultaneous animations.) Maybe there should be </span>
@@ -177,10 +178,11 @@ specification</a>.</p>             </td>             <td class="code">          
 		<span class="p">]</span>
 	<span class="p">};</span>
 	
-	</pre></div>             </td>           </tr>                               <tr id="section-35">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-35">&#182;</a>               </div>               <p><code>$.fn.animate</code> cannot accept easings as functions (lame), instead they 
-need to be put into <code>$.easing</code> and specified via property names. This 
-function creates a new <code>$.easing</code> method based on a property in 
-<code>cubicBezierTimingFunctionPoints</code> (if needed) and returns its name.</p>             </td>             <td class="code">               <div class="highlight"><pre>	<span class="cm">/* FIXME? Is the extra complexity of creating these on-the-fly worth the </span>
+	</pre></div>             </td>           </tr>                               <tr id="section-35">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-35">&#182;</a>               </div>               <p><a href="http://api.jquery.com/animate/"><code>$.fn.animate</code></a> cannot accept easings 
+as <code>Function</code> objects. Instead, they need to be put into <code>$.easing</code> 
+and specified using property names. <code>getEasingFunction</code> creates an 
+easing function (if needed) based on a property of 
+<code>cubicBezierTimingFunctionPoints</code> and returns its <code>$.easing</code> name.</p>             </td>             <td class="code">               <div class="highlight"><pre>	<span class="cm">/* FIXME? Is the extra complexity of creating these on-the-fly worth the </span>
 <span class="cm">	   small performance savings and the smaller `$.easing` namespace </span>
 <span class="cm">	   footprint? Since `$.easing` is externally-visible, will it be </span>
 <span class="cm">	   confusing to not always have all css* easing functions present? </span>

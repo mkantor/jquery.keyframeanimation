@@ -6,7 +6,7 @@
 
 // References
 // ----------
-// - [CSS Animations - MDN](https://developer.mozilla.org/en/CSS/CSS_animations)
+// - [CSS Animations - MDN](http://developer.mozilla.org/en/CSS/CSS_animations)
 // - [W3C CSS Animations Specification](http://www.w3.org/TR/css3-animations/)
 
 // Usage
@@ -18,7 +18,7 @@
 //     		0.25: { 'font-size': '500%' },
 //     		1: { 'font-size': '50%' }
 //     	},
-//     	delays: [0, 1000, 2000], // correspond with elements in $('.animated')
+//     	delays: [0, 1000, 2000], // indexes match $('.animated')
 //     	animationIterationCount: 2,
 //     	animationTimingFunction: 'easeInOut'
 //     });
@@ -26,10 +26,11 @@
 // Settings
 // --------
 // - `keyframes`  
-//   An object of the form `{ percentage: { /* CSS property-value pairs */ }, 
-//   ... }` similar to the CSS 
-//   [`@keyframes`](https://developer.mozilla.org/en/CSS/@keyframes) at-rule. 
-//   Only CSS properties supported by `$.fn.animate` can be animated. 
+//   An object of the form 
+//   `{ percentage: { cssProperty: cssValue [, ...] } [, ...] }` similar to 
+//   the CSS [`@keyframes`](http://developer.mozilla.org/en/CSS/@keyframes) 
+//   at-rule. Only CSS properties/values supported by 
+//   [`$.fn.animate`](http://api.jquery.com/animate/) can be animated. 
 //   Percentages are specified using numbers between 0 and 1 (inclusive). This 
 //   *must* include properties named `0` and `1` (the starting and ending 
 //   states of the animation).
@@ -176,9 +177,9 @@
 					// beginning the next animation. At first glance this 
 					// may appear to be a complicated way of doing 
 					// `queue: false`, but this setup has better behavior 
-					// when timeouts drift. Note that unlike the `fx` 
-					// queue, custom queues need to be manually traversed 
-					// using `$.fn.dequeue`.
+					// when timeouts drift. Unlike the default queue, 
+					// custom queues need to be manually traversed using 
+					// [`$.fn.dequeue`](http://api.jquery.com/dequeue/).
 					/* FIXME? Will calling `.stop()` thwart attempts to 
 					   resolve the "skipped styles" bug? (Since the 
 					   solution to that will probably need multiple 
@@ -246,10 +247,11 @@
 	};
 	
 	
-	// `$.fn.animate` cannot accept easings as functions (lame), instead they 
-	// need to be put into `$.easing` and specified via property names. This 
-	// function creates a new `$.easing` method based on a property in 
-	// `cubicBezierTimingFunctionPoints` (if needed) and returns its name.
+	// [`$.fn.animate`](http://api.jquery.com/animate/) cannot accept easings 
+	// as `Function` objects. Instead, they need to be put into `$.easing` 
+	// and specified using property names. `getEasingFunction` creates an 
+	// easing function (if needed) based on a property of 
+	// `cubicBezierTimingFunctionPoints` and returns its `$.easing` name.
 	/* FIXME? Is the extra complexity of creating these on-the-fly worth the 
 	   small performance savings and the smaller `$.easing` namespace 
 	   footprint? Since `$.easing` is externally-visible, will it be 
