@@ -64,7 +64,7 @@ brainstorming. Pull requests are obviously very much appreciated.
 
 --------------------------------------------------------------------------------
 - make the `delays` setting less whack
-	- support a single number that applies to all elements like other settings
+	- support a way to apply to all elements like other settings
 	- rename to "animationDelay"
 	- do away with index-based specification
 		- need a viable alternative
@@ -85,22 +85,42 @@ brainstorming. Pull requests are obviously very much appreciated.
 			  currently work
 				- could not worry about this and just have 
 				  `animationDuration` (and any other difficult cases) only 
-				  work globally for now
+				  work globally for now (probably want some explicit error 
+				  handling for this)
 		- possible selector-based implementation:  
 		  ```
-		  	{
-		  		animationDelay: {
-		  			'some > .selector': 100,
-		  			'another + .selector': 200
+		  	$('.selector').keyframeAnimation({
+		  		'@keyframes': {...},
+		  		'some > .selector': {
+		  			animationDelay: 100,
+		  			animationTimingFunction: 'easeOut'
 		  		},
-		  		animationDuration: 1000, // non-object values would apply to all elements like they do now
-		  		animationTimingFunction: {
-		  			'.selector': 'easeOut'
+		  		'another + .selector': {
+		  			animationDelay: 200
+		  		},
+		  		'one.more .selector': {
+		  			animationIterationCount: 3
+		  		},
+		  		'*': {
+		  			animationDuration: 1000
 		  		}
+		  		// `animation*` properties at settings root should probably
+		  		// be equivalent to the above ('*') for better usability 
+		  		// in simple/common cases (the way most settings work now).
+		  		// The implementation would be something like "if 
+		  		// settings[x] is not an object it gets moved into 
+		  		// settings['*'][x]" and it should handle collisions 
+		  		// gracefully (maybe settings present in a '*' selector 
+		  		// should override any root settings since it could 
+		  		// be considered to be "more specific").
 		  	}
 		  ```
 			- all the selector matching required to implement this could 
 			  cause a performance hit
+			- would have to handle selector specificity to determine what 
+			  overrides what
+			- the settings parsing logic for this could probably be 
+			  abstracted its own library
 	- in CSS `animation-timing-function` is supported inside keyframes
 	- properly support the `<time>` data type for `animation-delay` and 
 	  `animation-duration`
