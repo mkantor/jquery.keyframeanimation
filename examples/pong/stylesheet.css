@@ -11,6 +11,11 @@
 		color: white;
 	}
 	
+	p {
+		margin: 0;
+		padding: 1em;
+	}
+	
 	.player,
 	#ball {
 		background-color: white;
