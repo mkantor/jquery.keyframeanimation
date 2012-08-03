@@ -12,7 +12,7 @@ if [ $# -ne 1 ]
 then
 	echo 1>&2 "$0: One argument (the source file) must be specified."
 	exit 64
-elif [ ! -f $1 ]
+elif [ ! -f "$1" ]
 then
 	echo 1>&2 "$0: $1: No such file."
 	exit 66
@@ -56,7 +56,7 @@ then
 	UNDERLINE=`echo "$TITLE" | sed 's/./=/g'`
 	
 	# Generate the full README and save it.
-	printf '%s\n%s\n\n%s\n' "$TITLE" "$UNDERLINE" "$README_BODY" > "$README_FILE" && echo "Saved README in $README_FILE."
+	printf '%s\n%s\n\n%s\n' "$TITLE" "$UNDERLINE" "$README_BODY" > "$README_FILE" && echo "$0: Saved README in $README_FILE."
 else
-	echo "No README text was found."
+	echo "$0: No README text was found."
 fi
