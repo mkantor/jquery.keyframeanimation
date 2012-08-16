@@ -76,11 +76,12 @@
 	// `initialize` method.
 	$.fn.keyframeAnimation = function(propertyOrSettings/* [, ...] */) {
 		if($.fn.keyframeAnimation[propertyOrSettings]) {
+			var property = $.fn.keyframeAnimation[propertyOrSettings];
 			// Is this property callable?
-			if($.fn.keyframeAnimation[propertyOrSettings].apply) {
-				return $.fn.keyframeAnimation[propertyOrSettings].apply(this, Array.prototype.slice.call(arguments, 1));
+			if(property.apply) {
+				return property.apply(this, Array.prototype.slice.call(arguments, 1));
 			} else {
-				return $.fn.keyframeAnimation[propertyOrSettings];
+				return property;
 			}
 		} else {
 			return $.fn.keyframeAnimation.initialize.apply(this, arguments);
