@@ -3,6 +3,13 @@ brainstorming. Pull requests are obviously very much appreciated.
 
 
 --------------------------------------------------------------------------------
+- determine whether the new (as of jQuery 1.8) `$.fn.animate()` implementation 
+  can be used/abused for great victory
+	- https://gist.github.com/54829d408993526fe475
+	- either read the source to figure out how it works or wait for 
+	  documentation to be finalized
+
+--------------------------------------------------------------------------------
 - provide a setting for `animation-fill-mode`
 	- right now behavior is equivalent to "forwards"
 	- could implement "backwards" by applying 0% styles right away
